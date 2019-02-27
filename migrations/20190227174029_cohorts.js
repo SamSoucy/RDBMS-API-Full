@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
         tbl.increments();
 
         tbl
-            .string("name")
+            .text("name")
             .notNullable()
             .unique()
         
