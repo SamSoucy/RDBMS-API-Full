@@ -73,6 +73,26 @@ router.put('/:id', (req, res) => {
     .catch(error => {
       res.status(500).json(error)
     })
+});
+  
+//*************delete a cohort**************/
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id
+    db('cohorts')
+    db('cohorts')
+    .where({ id })
+    .del()
+    .then(response => {
+      if(response > 0) {
+        res.status(204).end()
+      } else {
+        res.status(404).json({ message: 'That cohort could not be found' })
+      }
+    })
+    .catch(err => {
+      res.status(500).json(err)
+    })
   });
   
 module.exports = router;
