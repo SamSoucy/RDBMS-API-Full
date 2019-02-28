@@ -22,4 +22,3 @@ exports.down = function (knex, Promise) {
 };
 
 
-//npx knex migrate:latest

@@ -25,14 +25,33 @@ router.get('/:id', (req, res) => {
     db('cohorts')
     .where({id: req.params.id})
     .first()
-    .then(role => {
-      res.status(200).json(role)
+    .then(cohort => {
+      res.status(200).json(cohort)
     })
     .catch(err => {
       res.status(500).json(err)
     })
 });
-  
+
+//******all students for a cohort with the specified id*****/
+
+router.get('/:id/students', (req, res) => {
+    const {id} = req.params
+    db('students')
+    .where("cohort_id", id)
+        .then(names => {
+            if (names.length) {
+                res.json(names)
+            } else {
+                res.status(400).json({ message: "This cohort does not have any students" })
+            }
+    })
+    .catch(() => {
+        res.status(500).json({ message: "Could not find students in this cohort" })
+    })
+});
+
+
 //************adds a new cohort************/
 
 router.post('/', (req, res) => {
