@@ -31,6 +31,25 @@ router.get('/:id', (req, res) => {
     .catch(err => {
       res.status(500).json(err)
     })
+});
+  
+//************adds a new cohort************/
+
+router.post('/', (req, res) => {
+    db('cohorts')
+    .insert(req.body)
+    .then(([id]) => {
+  
+      db('cohorts')
+      .where({ id })
+      .first()
+      .then(response => {
+        res.status(200).json(response);
+      })
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    })
   });
   
 module.exports = router;
