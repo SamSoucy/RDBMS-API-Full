@@ -18,5 +18,19 @@ router.get('/', (req, res) => {
       res.status(500).json(error)
     })
 });
+
+//*************returns a cohort with a the matching id*************/
+
+router.get('/:id', (req, res) => {
+    db('cohorts')
+    .where({id: req.params.id})
+    .first()
+    .then(role => {
+      res.status(200).json(role)
+    })
+    .catch(err => {
+      res.status(500).json(err)
+    })
+  });
   
 module.exports = router;
